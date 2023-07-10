@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "a6ebfcb4-ad84-4ac6-be40-c8fae1c4e2a0",
+		"name": "swapi (tests)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27641822",
+		"_collection_link": "https://winter-comet-89484.postman.co/workspace/First~83ceb540-fd8b-46dc-b4cd-1258af9dbb83/collection/27641822-a6ebfcb4-ad84-4ac6-be40-c8fae1c4e2a0?action=share&creator=27641822&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Tests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//1.Проверка ответа в формате JSON\r",
+							"pm.test(\"Проверка ответа в формате JSON\", function(){\r",
+							"    pm.response.to.have.jsonBody()\r",
+							"});\r",
+							"\r",
+							"//2. Проверка на наличие полей в ответе\r",
+							"pm.test(\"Проверка на наличие полей в ответе\", function(){\r",
+							"    const jsonData = pm.response.json();\r",
+							"\r",
+							"    pm.expect(jsonData).to.have.property(\"people\");\r",
+							"    pm.expect(jsonData).to.have.property(\"planets\");\r",
+							"    pm.expect(jsonData).to.have.property(\"films\");\r",
+							"    pm.expect(jsonData).to.have.property(\"species\");\r",
+							"    pm.expect(jsonData).to.have.property(\"vehicles\");\r",
+							"    pm.expect(jsonData).to.have.property(\"starships\");\r",
+							"    \r",
+							"});    \r",
+							"\r",
+							"//3. Знанение в ответе не NULL\r",
+							"\r",
+							"pm.test(\"Знанение в ответе не NULL\", function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.people).not.equal(null);\r",
+							"    pm.expect(jsonData.planets).not.equal(null);\r",
+							"    pm.expect(jsonData.films).not.equal(null);\r",
+							"    pm.expect(jsonData.species).not.equal(null);\r",
+							"    pm.expect(jsonData.vehicles).not.equal(null);\r",
+							"    pm.expect(jsonData.starships).not.equal(null);\r",
+							"}); \r",
+							"\r",
+							"//4. Проверка наличия значений в ответе\r",
+							"pm.test(\"Проверка наличия значений в ответе\", function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.people).not.equal(\"\");\r",
+							"    pm.expect(jsonData.planets).not.equal(\"\");\r",
+							"    pm.expect(jsonData.films).not.equal(\"\");\r",
+							"    pm.expect(jsonData.species).not.equal(\"\");\r",
+							"    pm.expect(jsonData.vehicles).not.equal(\"\");\r",
+							"    pm.expect(jsonData.starships).not.equal(\"\");\r",
+							"});\r",
+							"\r",
+							"//5. Проверка поля на необходимое значение\r",
+							"pm.test(\"Проверка поля на необходимое значение\", function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.people).to.equal(\"https://swapi.dev/api/people/\");\r",
+							"    pm.expect(jsonData.planets).to.equal(\"https://swapi.dev/api/planets/\");\r",
+							"    pm.expect(jsonData.films).to.equal(\"https://swapi.dev/api/films/\");\r",
+							"    pm.expect(jsonData.species).to.equal(\"https://swapi.dev/api/species/\");\r",
+							"    pm.expect(jsonData.vehicles).to.equal(\"https://swapi.dev/api/vehicles/\");\r",
+							"    pm.expect(jsonData.starships).to.equal(\"https://swapi.dev/api/starships/\");\r",
+							"});\r",
+							"\r",
+							"//6. Проверка статуса 200\r",
+							"pm.test(\"Проверка статуса 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"//7. Статус сообщения OK\r",
+							"pm.test(\"Статус сообщения OK\", function(){\r",
+							"    pm.response.to.have.status(\"OK\")\r",
+							"});\r",
+							"\r",
+							"//8. Время ответа менее 1000мс\r",
+							"pm.test(\"Время ответа менее 1000мс\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});\r",
+							"\r",
+							"//9. Content-Type is present\r",
+							"pm.test(\"Content-Type is present\", function () {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"//10. Проверка Content-Type Json\r",
+							"pm.test(\"Проверка Content-Type Json\", function(){\r",
+							"    pm.response.to.be.header(\"Content-Type\", \"application/json\")\r",
+							"});\r",
+							"\r",
+							"//11. Проверка наличия Cookies\r",
+							"\r",
+							"pm.test(\"Проверка наличия Cookies\", function(){\r",
+							"    \r",
+							"    pm.cookies.has(\"123\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"//12. Cookie имеют значение\r",
+							"\r",
+							"pm.test(\"Cookie имеют значение\", function(){\r",
+							"    try{\r",
+							"        var MY_COOKIE = pm.cookies.get(\"123\");\r",
+							"        console.log(MY_COOKIE);\r",
+							"    } catch(e){\r",
+							"            console.log(\"some problen with cookie\")\r",
+							"    }\r",
+							"\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://swapi.dev/api/",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"dev"
+					],
+					"path": [
+						"api",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
