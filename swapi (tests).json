@@ -91,25 +91,6 @@
 							"    pm.response.to.be.header(\"Content-Type\", \"application/json\")\r",
 							"});\r",
 							"\r",
-							"//11. Проверка наличия Cookies\r",
-							"\r",
-							"pm.test(\"Проверка наличия Cookies\", function(){\r",
-							"    \r",
-							"    pm.cookies.has(\"123\");\r",
-							"\r",
-							"});\r",
-							"\r",
-							"//12. Cookie имеют значение\r",
-							"\r",
-							"pm.test(\"Cookie имеют значение\", function(){\r",
-							"    try{\r",
-							"        var MY_COOKIE = pm.cookies.get(\"123\");\r",
-							"        console.log(MY_COOKIE);\r",
-							"    } catch(e){\r",
-							"            console.log(\"some problen with cookie\")\r",
-							"    }\r",
-							"\r",
-							"});\r",
 							"\r",
 							"\r",
 							""
@@ -144,6 +125,70 @@
 					"path": [
 						"api",
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Json schema",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data  = JSON.parse(responseBody);\r",
+							"\r",
+							"var schema = {\r",
+							"    //тип ответа\r",
+							"    \"type\": \"object\",\r",
+							"    //обязательные свойства\r",
+							"    \"required\": [\"people\",\"planets\",\"films\", \"species\",\"species\",\"starships\"],\r",
+							"    //тип возвращаемых полей\r",
+							"        \"properties\":{\r",
+							"        \"people\": {\"type\":\"string\"},\r",
+							"        \"planets\": {\"type\":\"string\"},\r",
+							"        \"films\": {\"type\":\"string\"},\r",
+							"        \"species\": {\"type\":\"string\"},\r",
+							"        \"vehicles\": {\"type\":\"string\"},\r",
+							"        \"starships\": {\"type\":\"string\"},\r",
+							"\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"pm.test('Корректный ответ', function(){\r",
+							"    pm.expect(tv4.validate(data, schema)).to.be.true;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://swapi.dev/api",
+					"protocol": "https",
+					"host": [
+						"swapi",
+						"dev"
+					],
+					"path": [
+						"api"
 					]
 				}
 			},
